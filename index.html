@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Devereux Henley</title>
+    <link rel="stylesheet" href="/common/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/common/css/server.css">
+  </head>
+  <body>
+    <div class="container">
+      <nav class="navbar navbar-default">
+        <div class="container-fluid">
+          <div class="navbar-header">
+            <a href="/" class="navbar-brand">Devereux Henley Solid Home</a>
+          </div>
+          <div class="nav navbar-right navbar-form">
+            <button id="session-action" type="button" class="session-action btn btn-default navbar-btn">Loading...</button>
+          </div>
+        </div>
+      </nav>
+
+
+      <p class="lead">
+        <span>
+          This is a public homepage of Devereux Henley, whose WebID is
+        </span>
+        <a href="https://devereux.solid.community/profile/card#me"><mark>https://devereux.solid.community/profile/card#me</mark></a>.
+      </p>
+
+      <section>
+        <h1>Data</h1>
+        <div class="list-group">
+          <a href="/profile/card" target="_blank" class="list-group-item">
+            <span class="lead">Profile</span>
+            <span class="badge">public</span>
+          </a>
+          <a href="/inbox/" target="_blank" class="list-group-item">
+            <span class="lead">Inbox</span>
+            <span class="badge">private</span>
+          </a>
+          <a href="/public/" target="_blank" class="list-group-item">
+            <span class="lead">Public Folder</span>
+            <span class="badge">public</span>
+          </a>
+        </div>
+      </section>
+
+      <section>
+        <h1>Apps</h1>
+        <div class="list-group">
+          <a href="/blog" target="_blank" class="list-group-item">
+            <span class="lead">Blog</span>
+          </a>
+          <a href="https://otto-aa.github.io/solid-filemanager/?url=https://devereux.solid.community" target="_blank" class="list-group-item">
+            <span class="lead">File Browser</span>
+          </a>
+        </div>
+      </section>
+    </div>
+
+    <script src="/common/js/solid-auth-client.bundle.js"></script>
+    <script type="text/javascript">
+     (function () {
+       'use strict'
+       var button = document.getElementById('session-action')
+       var loggedIn = false
+
+       solid.auth.trackSession(session => {
+         loggedIn = !!session
+         button.innerText = loggedIn ? 'Log out' : 'Log in'
+         button.classList.remove('btn-default');
+         button.classList.add(loggedIn ? 'btn-danger' : 'btn-primary')
+       })
+
+       button.addEventListener('click', function () {
+         loggedIn ? solid.auth.logout() : solid.auth.popupLogin()
+       })
+     })()
+    </script>
+  </body>
+</html>
